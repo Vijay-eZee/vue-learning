@@ -1,0 +1,3 @@
+<template>
+    default page
+</template>

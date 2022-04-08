@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["settings"],{"4ef5":function(n,t,e){"use strict";function s(n,t){return" setting "}e.r(t);var i=e("6b0d"),o=e.n(i);const r={};t["default"]=o()(r,[["render",s]])}}]);
+//# sourceMappingURL=settings.cfb61752.js.map
