@@ -23,7 +23,7 @@
       </template>
       <template v-slot:content="{ item }">
         <div class="flex">
-          <!-- <div
+          <div
             class="
               flex
               justify-center
@@ -37,10 +37,10 @@
             "
           >
             {{ item.name.charAt(0) }}
-          </div> -->
-          <div class="flex justify-center items-center w-8 h-8 mr-2 font-bold">
-            <input type="checkbox" />
           </div>
+          <!-- <div class="flex justify-center items-center w-8 h-8 mr-2 font-bold">
+            <input type="checkbox" />
+          </div> -->
           <span>{{ item.name }}</span>
         </div>
       </template>

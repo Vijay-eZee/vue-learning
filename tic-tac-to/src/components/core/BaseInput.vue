@@ -1,0 +1,34 @@
+<template>
+  <div class="flex border-2 mt-1 border-gray-300 rounded-lg overflow-hidden">
+    <div class="flex items-center justify-center bg-gray-400 w-8">
+      <slot name="prepend-icon"></slot>
+    </div>
+    <input
+      :value="modelValue"
+      placeholder="enter input"
+      class="p-2 focus:outline-none"
+      @input="updateInput"
+    />
+  </div>
+</template>
+<script>
+export default {
+  name: "BaseInput",
+  props: ["modelValue", "modelModifiers"],
+  emits: {
+    "update:modelValue": (newStr) => {
+      if (isNaN(newStr)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  methods: {
+    updateInput($event) {
+      const newstr = $event.target.value;
+      this.$emit("update:modelValue", newstr);
+    },
+  },
+};
+</script>
