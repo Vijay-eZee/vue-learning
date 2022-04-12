@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center h-screen">
-    <BaseInput v-model.capitalize="userName">
+    <BaseInput v-model="userName">
       <template v-slot:prepend-icon>
         <span class="material-icons-outlined"> account_circle </span>
       </template>

@@ -14,20 +14,12 @@
 <script>
 export default {
   name: "BaseInput",
-  props: ["modelValue", "modelModifiers"],
-  emits: {
-    "update:modelValue": (newStr) => {
-      if (isNaN(newStr)) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-  },
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
   methods: {
     updateInput($event) {
       const newstr = $event.target.value;
-      this.$emit("update:modelValue", newstr);
+        this.$emit("update:modelValue", newstr);
     },
   },
 };
