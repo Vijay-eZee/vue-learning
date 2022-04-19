@@ -1,24 +1,21 @@
 <template>
   <div class="flex flex-col justify-center items-center h-screen">
-    <BaseInput v-model="userName">
+    <base-text-input v-model="userName">
       <template v-slot:prepend-icon>
         <span class="material-icons-outlined"> account_circle </span>
       </template>
-    </BaseInput>
-    <BaseInput v-model="emailId">
+    </base-text-input>
+    <base-text-input v-model="emailId">
       <template v-slot:prepend-icon>
         <span class="material-icons-outlined"> email </span>
       </template>
-    </BaseInput>
+    </base-text-input>
   </div>
 </template>
 <script>
-import BaseInput from "../core/BaseInput.vue";
+
 export default {
   name: "Signup",
-  components: {
-    BaseInput,
-  },
   data() {
     return {
       userName: "",

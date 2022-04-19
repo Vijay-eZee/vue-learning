@@ -21,7 +21,7 @@ const routes = [
         path: '/TicTac',
         name: 'tictac',
         component: () => import('../components/tictac/MainBoard.vue'),
-        meta: { authRequired: true }
+        meta: { authRequired: false }
 
     },
     {

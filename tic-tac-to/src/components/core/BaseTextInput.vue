@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: "BaseInput",
+  name: "BaseTextInput",
   props: ["modelValue"],
   emits: ["update:modelValue"],
   methods: {
