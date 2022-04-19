@@ -5,14 +5,6 @@
         <Board @set-current-player="setCurrentPlayer" @set-result="setResult" />
         <SideMenu :currentPlayer="currentPlayer"> </SideMenu>
       </div>
-      <div v-else-if="!isPlay && isExit" class="flex">
-        <base-core-button
-          class="bg-blue-400 p-2 w-28 hover:bg-green-400 rounded-full"
-          @custom-click="handlePlayAction"
-        >
-          <template v-slot:text> play </template>
-        </base-core-button>
-      </div>
       <div v-else-if="isGameOver" class="flex flex-col">
         <p v-if="result !== -1" class="mt-2 text-green-400 break-all">
           player {{ result }} won the game !!!
@@ -32,6 +24,14 @@
             <template v-slot:text> Exit </template>
           </base-core-button>
         </div>
+      </div>
+      <div v-else-if="isExit || !isPlay" class="flex">
+        <base-core-button
+          class="bg-blue-400 p-2 w-28 hover:bg-green-400 rounded-full"
+          @custom-click="handlePlayAction"
+        >
+          <template v-slot:text> play </template>
+        </base-core-button>
       </div>
     </div>
   </div>
