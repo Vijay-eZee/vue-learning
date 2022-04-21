@@ -25,6 +25,13 @@ const routes = [
 
     },
     {
+        path: '/Quiz',
+        name: 'quiz',
+        component: () => import('../components/quiz/'),
+        meta: { authRequired: false }
+
+    },
+    {
         path: '/Login',
         name: 'login',
         component: () => import('../components/auth/Login.vue'),

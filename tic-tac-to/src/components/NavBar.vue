@@ -7,6 +7,9 @@
       <router-link :to="{ name: 'tictac' }">TicTac</router-link>
     </li>
     <li class="inline">
+      <router-link :to="{ name: 'quiz' }">Quiz</router-link>
+    </li>
+    <li class="inline">
       <router-link :to="{ name: 'about' }">About</router-link>
     </li>
     <li class="inline">
