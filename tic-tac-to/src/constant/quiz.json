@@ -1,0 +1,63 @@
+[
+    {
+        "qId": 1,
+        "que": "What does PHP stand for??",
+        "opts": [
+            {
+                "optId": 1,
+                "opt": "Open Source Laguage"
+            },
+            {
+                "optId": 2,
+                "opt": "Widely Used Language"
+            },
+            {
+                "optId": 3,
+                "opt": "Server side scripting language"
+            },
+            {
+                "optId": 4,
+                "opt": "All of the above"
+            }
+        ],
+        "ans": 4
+    },
+    {
+        "qId": 2,
+        "que": "PHP is a case sensitive",
+        "opts": [
+            {
+                "optId": 1,
+                "opt": " True"
+            },
+            {
+                "optId": 2,
+                "opt": "False"
+            }
+        ],
+        "ans": 2
+    },
+    {
+        "qId": 3,
+        "que": "Which sign is used to access variable of variable in PHP?",
+        "opts": [
+            {
+                "optId": 1,
+                "opt": "$$"
+            },
+            {
+                "optId": 2,
+                "opt": "$"
+            },
+            {
+                "optId": 3,
+                "opt": "#@"
+            },
+            {
+                "optId": 4,
+                "opt": ". $|"
+            }
+        ],
+        "ans": 2
+    }
+]

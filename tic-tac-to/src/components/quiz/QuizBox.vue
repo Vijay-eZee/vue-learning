@@ -12,39 +12,22 @@
         p-4
       "
     >
-      <QuizQue>
-        <template v-slot:que-no>1</template>
-        <template v-slot:que-seprator>:</template>
-        <template v-slot:que-text
-          >What are the advantages of using Vue.js?</template
-        >
-      </QuizQue>
-      <QuizOpt>
-        <template v-slot:pre-icon>2</template>
-        <template v-slot:content
-          >Small in size — The size is 18 to 21KB. It requires no time for
-          theuser to download and apply it.</template
-        >
-      </QuizOpt>
-      <QuizOpt>
-        <template v-slot:pre-icon>3</template>
-        <template v-slot:content>Small in size — </template>
-      </QuizOpt>
-      <QuizOpt>
-        <template v-slot:pre-icon>4</template>
-        <template v-slot:content
-          >Small in size — The size is 18 to 21KB.</template
-        >
-      </QuizOpt>
-      <QuizOpt>
-        <template v-slot:pre-icon>1</template>
-        <template v-slot:content
-          >The size is 18 to 21KB. It requires no time for theuser to download
-          and apply it.</template
-        >
-      </QuizOpt>
-      <div class="absolute bottom-2">
-        <QuizBoxFooter />
+      <div v-if="!isQuizCompleted">
+        <QuizQue>
+          <template v-slot:que-no>{{ currentQuestionNo + 1 }}</template>
+          <template v-slot:que-seprator>:</template>
+          <template v-slot:que-text>{{ getQuestion.que }}</template>
+        </QuizQue>
+        <QuizOpt v-for="(opt, index) in getQuestion.opts" :key="index">
+          <template v-slot:pre-icon>{{ replaceIndexWithAlph(index) }}</template>
+          <template v-slot:content>{{ opt.opt }}</template>
+        </QuizOpt>
+        <div class="absolute bottom-2">
+          <QuizBoxFooter :fetchNextQue="incrementQuestionNo" />
+        </div>
+      </div>
+      <div v-else class="flex justify-center items-center h-full">
+        <FinishFooter />
       </div>
     </div>
   </div>
@@ -53,12 +36,58 @@
 import QuizQue from "./QuizQue.vue";
 import QuizOpt from "../quiz/QuizOpt.vue";
 import QuizBoxFooter from "../quiz/QuizBoxFooter.vue";
+import quizData from "../../constant/quiz";
+import FinishFooter from "../quiz/FinishFooter.vue";
 export default {
   name: "QuizBox",
   components: {
     QuizQue,
     QuizOpt,
     QuizBoxFooter,
+    FinishFooter,
+  },
+  data() {
+    return {
+      questions: quizData,
+      currentQuestionNo: 0,
+      isQuizCompleted: false,
+    };
+  },
+
+  computed: {
+    getQuestion() {
+      console.log(this.questions[this.currentQuestionNo]);
+      if (this.questions[this.currentQuestionNo]) {
+        return this.questions[this.currentQuestionNo];
+      } else {
+        return [];
+      }
+    },
+  },
+  watch: {
+    currentQuestionNo(newQueNo, prevQue) {
+      if (newQueNo === 0 && prevQue > newQueNo) {
+        this.isQuizCompleted = true;
+      }
+    },
+  },
+  methods: {
+    incrementQuestionNo() {
+      this.currentQuestionNo++;
+      this.currentQuestionNo = this.currentQuestionNo % this.questions.length;
+    },
+    replaceIndexWithAlph(indx) {
+      switch (indx) {
+        case 0:
+          return "A";
+        case 1:
+          return "B";
+        case 2:
+          return "C";
+        case 3:
+          return "D";
+      }
+    },
   },
 };
 </script>
