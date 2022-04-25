@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 border-gray-300 p-2 rounded w-full font-normal">
+  <div class="border-2 border-gray-300 p-2 rounded w-full font-normal mt-2">
     <span class="mr-1">
       <slot name="que-no"></slot>
     </span>

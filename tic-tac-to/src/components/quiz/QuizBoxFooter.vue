@@ -3,6 +3,9 @@
     <QuizButton class="border-0 bg-blue-400 rounded-full py-1 px-4">
       <template v-slot:btn-name>Flip</template>
     </QuizButton>
+    <!-- <QuizButton class="border-0 bg-blue-400 rounded-full py-1 px-4">
+      <template v-slot:btn-name>50-50</template>
+    </QuizButton> -->
     <QuizButton
       class="border-0 bg-blue-400 rounded-full py-1 px-4"
       @click="fetchNextQue"

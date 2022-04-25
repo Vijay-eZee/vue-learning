@@ -18,6 +18,10 @@
             {
                 "optId": 4,
                 "opt": "All of the above"
+            },
+            {
+                "optId": 5,
+                "opt": "No ans"
             }
         ],
         "ans": 4
