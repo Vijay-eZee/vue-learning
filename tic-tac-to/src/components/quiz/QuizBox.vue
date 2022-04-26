@@ -12,7 +12,6 @@
         p-4
       "
     >
-      {{ localTime }}
       <QuizBoxHeader />
       <div v-if="!isQuizCompleted">
         <QuizQue>
@@ -65,7 +64,7 @@ export default {
     const selectedAns = ref("");
     const localTime = ref(5);
     let timerId = null;
-    provide("timeLeft", localTime.value);
+    provide("timeLeft", localTime);
     const getQuestion = computed(() => {
       if (questions.value[currentQuestionNo.value]) {
         console.log(questions.value[currentQuestionNo.value]);
@@ -80,7 +79,9 @@ export default {
     watch(currentQuestionNo, (newQueNo, prevQue) => {
       if (newQueNo === 0 && prevQue > newQueNo) {
         isQuizCompleted.value = true;
+        stopTimer();
       }
+      startlocalTimer();
     });
 
     function incrementQuestionNo() {
@@ -90,23 +91,24 @@ export default {
     }
 
     function startlocalTimer() {
+      localTime.value = 5;
       if (timerId) {
         clearTimeout(timerId);
         timerId = null;
       }
 
       timerId = setTimeout(function tick() {
-        decrementTimer();
+        localTime.value--;
         timerId = setTimeout(tick, 1000);
+        if (localTime.value <= 0) {
+          stopTimer();
+          incrementQuestionNo();
+        }
       }, 1000);
     }
-
-    function decrementTimer() {
-      localTime.value--;
-      if (!localTime.value < 0) {
-        clearTimeout(timerId);
-        timerId = null;
-      }
+    function stopTimer() {
+      clearTimeout(timerId);
+      timerId = null;
     }
     // function replaceIndexWithAlph(indx) {
     //   switch (indx) {
