@@ -8,10 +8,14 @@ const getters = {
     }
 }
 const actions = {
-
+    setAuthToken(context, token) {
+        context.commit('changeAuthState', token)
+    }
 }
 const mutations = {
-
+    changeAuthState(state, token) {
+        state.authToken = token
+    }
 }
 export default {
     state,

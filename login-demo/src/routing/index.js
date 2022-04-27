@@ -1,5 +1,5 @@
 const { createRouter, createWebHistory } = require("vue-router")
-//import store from '../store'
+import store from '../store'
 const routes = [
     {
         path: '/',
@@ -23,29 +23,29 @@ const routes = [
         component: () => import('../components/blogs/'),
         // meta: { authRequired: true }
     },
-     {
+    {
         path: '/blogs/blog/:blogId',
         name: 'detail',
         component: () => import('../components/blogs/Detail'),
-       // meta: { authRequired: true }
+        meta: { authRequired: true }
     },
-    // {
-    //     path: '/Login',
-    //     name: 'login',
-    //     component: () => import('../components/auth/Login.vue'),
-    //    // meta: { layout: 'AuthLayout' }
-    // },
+    {
+        path: '/Login',
+        name: 'login',
+        component: () => import('../components/auth/Login.vue'),
+        meta: { layout: 'AuthLayout' }
+    },
     // {
     //     path: '/Signup',
     //     name: 'signup',
     //     component: () => import('../components/auth/Signup.vue'),
-    //    // meta: { layout: 'AuthLayout' }
+    //     // meta: { layout: 'AuthLayout' }
     // },
     {
         path: '/:pathMatch(.*)',
         name: '404',
         component: () => import('../components/404/index.vue'),
-      //  meta: { layout: 'ErrorLayout' }
+        meta: { layout: 'ErrorLayout' }
     },
 ]
 const router = createRouter({
@@ -54,16 +54,25 @@ const router = createRouter({
 })
 // router.beforeEach((to, from, next) => {
 //     if (to.matched.some(record => record.meta.authRequired)) {
-//         console.log(store.getters.isAuthenticate)
-//         if (!store.getters.isAuthenticate) {
-//             next({
-//                 name: 'home'
-//             })
-//         } else {
-//             next()
-//         }
+//         next({ name: 'login' })
+
 //     } else {
 //         next()
+
 //     }
 // })
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.authRequired)) {
+        console.log(store.getters.isAuthenticate)
+        if (!store.getters.isAuthenticate) {
+            next({
+                name: 'login'
+            })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
+})
 export default router
