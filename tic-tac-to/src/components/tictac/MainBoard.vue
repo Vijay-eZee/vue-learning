@@ -1,6 +1,9 @@
 <template>
   <div class="bg-blue-200 h-screen flex justify-center items-center">
+    {{ clientId }}
     <div class="flex bg-gray-200 p-10 w-96 h-72 justify-center items-center">
+      <!-- <input placeholder="type here..." v-model="message" />
+      <button @click="sendMessage">send</button> -->
       <div v-if="isPlay" class="flex">
         <Board @set-current-player="setCurrentPlayer" @set-result="setResult" />
         <SideMenu :currentPlayer="currentPlayer"> </SideMenu>
@@ -25,12 +28,38 @@
           </base-core-button>
         </div>
       </div>
-      <div v-else-if="isExit || !isPlay" class="flex">
-        <base-core-button
+      <div v-else-if="isExit || !isPlay" class="flex flex-col">
+        <!-- <base-core-button
           class="bg-blue-400 p-2 w-28 hover:bg-green-400 rounded-full"
           @custom-click="handlePlayAction"
         >
           <template v-slot:text> play </template>
+        </base-core-button> -->
+        <base-core-button
+          class="
+            bg-blue-400
+            p-2
+            hover:bg-green-400
+            rounded-full
+            text-white
+            font-bold
+          "
+          @custom-click="createNewGame"
+        >
+          <template v-slot:text> Create New Game </template>
+        </base-core-button>
+        <base-core-button
+          class="
+            bg-blue-400
+            p-2
+            hover:bg-green-400
+            rounded-full
+            text-white
+            font-bold
+          "
+          @custom-click="handlePlayAction"
+        >
+          <template v-slot:text>Joined By Group Id</template>
         </base-core-button>
       </div>
     </div>
@@ -40,6 +69,9 @@
 import BaseCoreButton from "../core/BaseCoreButton.vue";
 import Board from "./Board.vue";
 import SideMenu from "./SideMenu.vue";
+import { io } from "socket.io-client";
+//import { nanoid } from "nanoid";
+
 export default {
   name: "MainBoard",
   components: {
@@ -54,7 +86,21 @@ export default {
       isPlay: 0,
       isGameOver: 0,
       isExit: 0,
+      socket: null,
+      message: "",
+      clientId: "",
+      gameId: "",
     };
+  },
+  mounted() {
+    this.socket = io("http://localhost:5000");
+    this.socket.on("clientConnect", (payload) => {
+      this.clientId = JSON.parse(payload).clientId;
+    });
+    this.socket.on("create", (payload) => {
+      console.log(payload);
+      //  this.clientId = JSON.parse(payload).clientId;
+    });
   },
   methods: {
     setCurrentPlayer(payload) {
@@ -81,6 +127,13 @@ export default {
       this.isExit = 1;
       this.isGameOver = 0;
     },
+    createNewGame() {
+      const payLoad = {
+        clientId: this.clientId,
+      };
+      this.socket.emit("create", JSON.stringify(payLoad));
+    },
+    joinGameById() {},
   },
 };
 </script>

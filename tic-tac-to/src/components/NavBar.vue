@@ -10,7 +10,7 @@
       <router-link :to="{ name: 'quiz' }">Quiz</router-link>
     </li>
     <li class="inline">
-      <router-link :to="{ name: 'about' }">About</router-link>
+      <router-link :to="{ name: 'chat' }">Chatdemo</router-link>
     </li>
     <li class="inline">
       <router-link :to="{ name: 'contact' }">Contact</router-link>

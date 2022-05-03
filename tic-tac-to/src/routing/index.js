@@ -8,9 +8,9 @@ const routes = [
 
     },
     {
-        path: '/About',
-        name: 'about',
-        component: () => import('../components/About.vue')
+        path: '/Chat',
+        name: 'chat',
+        component: () => import('../components/chatdemo/MainBoard.vue')
     },
     {
         path: '/Contact',
