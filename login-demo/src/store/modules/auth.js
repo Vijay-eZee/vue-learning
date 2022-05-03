@@ -1,5 +1,5 @@
 const state = () => ({
-    authToken: ''
+    authToken: 'fsdf'
 
 })
 const getters = {
