@@ -12,38 +12,54 @@
       items-center
       border-2 border-r-0 border-b-0 border-solid border-black
     "
-  :class="{'disable-click':matrix[rowIndex][colIndex]!==0}"
-   @click="$emit('checked-box-clicked',{rowIndex:rowIndex,colIndex:colIndex})"
+    :class="{
+      'disable-click': matrix[rowIndex][colIndex] !== 0 || preventCurrent,
+    }"
+    @click="
+      $emit('checked-box-clicked', { rowIndex: rowIndex, colIndex: colIndex })
+    "
   >
-  <span v-if="matrix[rowIndex][colIndex]===1" class="material-icons-outlined">
-done
-</span>
-<span v-if="matrix[rowIndex][colIndex]===2" class="material-icons-outlined">
-close
-</span>
-<span v-if="matrix[rowIndex][colIndex]===0" class="material-icons-outlined">
-check_box_outline_blank
-</span>
+    <span
+      v-if="matrix[rowIndex][colIndex] === 1"
+      class="material-icons-outlined"
+    >
+      done
+    </span>
+    <span
+      v-if="matrix[rowIndex][colIndex] === 2"
+      class="material-icons-outlined"
+    >
+      close
+    </span>
+    <span
+      v-if="matrix[rowIndex][colIndex] === 0"
+      class="material-icons-outlined"
+    >
+      check_box_outline_blank
+    </span>
   </div>
 </template>
 <script>
 export default {
   name: "Square",
-  props:{
-    rowIndex:{
-      type:Number
+  props: {
+    rowIndex: {
+      type: Number,
     },
-    colIndex:{
-      type:Number
+    colIndex: {
+      type: Number,
     },
-    matrix:{
-      type:Array
-    }
-  }
+    matrix: {
+      type: Array,
+    },
+    preventCurrent: {
+      type: Boolean,
+    },
+  },
 };
 </script>
 <style scoped>
-.disable-click{
-  pointer-events: none
+.disable-click {
+  pointer-events: none;
 }
 </style>

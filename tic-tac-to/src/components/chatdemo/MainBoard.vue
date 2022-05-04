@@ -1,8 +1,19 @@
 <template>
-  <Header @active-tab="setActiveTab" />
-  <div class="flex items-center justify-center bg-white">
-    <div class="max-w-2xl w-full h-screen">
-      <component :is="currentTab"></component>
+  <div>
+    <Header @active-tab="setActiveTab" />
+    <div class="flex items-center justify-center bg-white">
+      <div class="max-w-2xl w-full h-screen">
+        <div v-show="currentTab === 'Visitors'">
+          <Visitors />
+        </div>
+        <div v-show="currentTab === 'Chat'">
+          <Chat />
+        </div>
+        <div v-show="currentTab === 'JoinRoom'">
+          <JoinRoom />
+        </div>
+        <!-- <component :is="currentTab"></component> -->
+      </div>
     </div>
   </div>
 </template>

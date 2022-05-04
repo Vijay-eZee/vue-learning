@@ -69,7 +69,7 @@
 import BaseCoreButton from "../core/BaseCoreButton.vue";
 import Board from "./Board.vue";
 import SideMenu from "./SideMenu.vue";
-import { io } from "socket.io-client";
+//import { io } from "socket.io-client";
 //import { nanoid } from "nanoid";
 
 export default {
@@ -93,14 +93,14 @@ export default {
     };
   },
   mounted() {
-    this.socket = io("http://localhost:5000");
-    this.socket.on("clientConnect", (payload) => {
-      this.clientId = JSON.parse(payload).clientId;
-    });
-    this.socket.on("create", (payload) => {
-      console.log(payload);
-      //  this.clientId = JSON.parse(payload).clientId;
-    });
+    // this.socket = io("http://localhost:5000");
+    // this.socket.on("clientConnect", (payload) => {
+    //   this.clientId = JSON.parse(payload).clientId;
+    // });
+    // this.socket.on("create", (payload) => {
+    //   console.log(payload);
+    //   //  this.clientId = JSON.parse(payload).clientId;
+    // });
   },
   methods: {
     setCurrentPlayer(payload) {
@@ -127,13 +127,6 @@ export default {
       this.isExit = 1;
       this.isGameOver = 0;
     },
-    createNewGame() {
-      const payLoad = {
-        clientId: this.clientId,
-      };
-      this.socket.emit("create", JSON.stringify(payLoad));
-    },
-    joinGameById() {},
   },
 };
 </script>

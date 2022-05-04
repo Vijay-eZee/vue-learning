@@ -14,6 +14,7 @@
           :matrix="matrix"
           :rowIndex="index"
           :colIndex="idx"
+          :preventCurrent="preventCurrent"
           @checked-box-clicked="handleCheckBoxClicked"
         />
       </div>
@@ -22,14 +23,31 @@
 </template>
 <script>
 import Square from "./Square.vue";
+import { io } from "socket.io-client";
 export default {
   name: "Board",
   components: {
     Square,
   },
-  mounted() {},
+  mounted() {
+    this.socket = io("http://localhost:5000");
+    this.socket.on("update-state", (payload) => {
+      this.matrix = payload.matrix;
+      this.player1 = payload.nextTurn.player1;
+      this.player2 = payload.nextTurn.player2;
+      this.$emit("set-current-player", {
+        currentPlayer: payload.player.currentPlayer,
+      });
+      //console.log(this.matrix);
+    });
+    this.socket.on("update-result", (payload) => {
+      this.$emit("set-result", payload);
+    });
+  },
   data() {
     return {
+      socket: null,
+      preventCurrent: false,
       player1: true,
       player2: false,
       matrix: [
@@ -46,7 +64,13 @@ export default {
         this.player1 = false;
         this.player2 = true;
         this.checkWinningCondition(1);
-        this.$emit("set-current-player", { currentPlayer: 2 });
+        //  this.$emit("set-current-player", { currentPlayer: 2 });
+        this.socket.emit("user_played", {
+          matrix: this.matrix,
+          nextTurn: { player1: this.player1, player2: this.player2 },
+          player: { currentPlayer: 2 },
+        });
+
         return;
       }
       if (this.player2) {
@@ -54,7 +78,12 @@ export default {
         this.player1 = true;
         this.player2 = false;
         this.checkWinningCondition(2);
-        this.$emit("set-current-player", { currentPlayer: 1 });
+        // this.$emit("set-current-player", { currentPlayer: 1 });
+        this.socket.emit("user_played", {
+          matrix: this.matrix,
+          nextTurn: { player1: this.player1, player2: this.player2 },
+          player: { currentPlayer: 1 },
+        });
         return;
       }
     },
@@ -67,7 +96,8 @@ export default {
           this.matrix[i][1] === player &&
           this.matrix[i][2] === player
         ) {
-          this.$emit("set-result", { result: player });
+          this.socket.emit("declare-winner", { result: player });
+          // this.$emit("set-result", { result: player });
           break;
         }
       }
@@ -78,7 +108,8 @@ export default {
           this.matrix[1][j] === player &&
           this.matrix[2][j] === player
         ) {
-          this.$emit("set-result", { result: player });
+          this.socket.emit("declare-winner", { result: player });
+          //  this.$emit("set-result", { result: player });
           break;
         }
       }
@@ -89,7 +120,8 @@ export default {
           this.matrix[i + 1][i + 1] === player &&
           this.matrix[i + 2][i + 2] === player
         ) {
-          this.$emit("set-result", { result: player });
+          this.socket.emit("declare-winner", { result: player });
+          //  this.$emit("set-result", { result: player });
           break;
         }
       }
@@ -99,7 +131,8 @@ export default {
           this.matrix[i - 1][1] === player &&
           this.matrix[i - 2][2] === player
         ) {
-          this.$emit("set-result", { result: player });
+          this.socket.emit("declare-winner", { result: player });
+          //this.$emit("set-result", { result: player });
           break;
         }
       }
@@ -112,7 +145,8 @@ export default {
       }
       console.log(cntNonZeroPos);
       if (cntNonZeroPos === 9) {
-        this.$emit("set-result", { result: -1 });
+        this.socket.emit("declare-winner", { result: -1 });
+        //  this.$emit("set-result", { result: -1 });
       }
     },
   },

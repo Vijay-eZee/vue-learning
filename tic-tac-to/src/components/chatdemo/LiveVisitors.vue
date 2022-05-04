@@ -1,17 +1,16 @@
 <template>
   <table>
-    {{
-      userDetail
-    }}
     <thead class="border-b-2">
-      <th v-for="(title, index) in Object.keys(userDetail[0])" :key="index">
-        {{ title }}
-      </th>
+      <th>User Name</th>
+      <th>Email</th>
     </thead>
     <tbody>
-      <tr v-for="(user, index) in userDetail" :key="index">
-        <td v-for="(col, indx) in user" :key="indx" class="border-2 p-2">
-          {{ col }}
+      <tr v-for="(user, index) in visitors" :key="index">
+        <td class="border-2 p-2">
+          {{ JSON.parse(user).userName }}
+        </td>
+        <td class="border-2 p-2">
+          {{ JSON.parse(user).email }}
         </td>
       </tr>
     </tbody>
@@ -38,8 +37,7 @@ export default {
     };
     this.socket.emit("new_visitor", JSON.stringify(payLoad));
     this.socket.on("visitors", (payLoad) => {
-      this.visitors = JSON.parse(payLoad);
-      console.log(this.visitors);
+      this.visitors = payLoad;
     });
   },
   computed: {
