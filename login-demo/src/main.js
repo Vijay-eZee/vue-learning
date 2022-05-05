@@ -6,6 +6,8 @@ import router from './routing'
 import store from './store';
 import AuthLayout from './layouts/AuthLayout.vue'
 import ErrorLayout from './layouts/ErrorLayout.vue'
+import myPlugin from './plugins/MyFirstPlugin'
+import DemoPlugin from './plugins/Demo.plugin'
 const app = createApp(App)
 app.component('AuthLayout', AuthLayout)
 app.component('ErrorLayout', ErrorLayout)
@@ -18,7 +20,8 @@ requireComponent.keys().forEach(fileName => {
     const componentConfig = requireComponent(fileName)
     app.component(fileName, componentConfig)
 });
-
+app.use(DemoPlugin)
+app.use(myPlugin)
 app.use(router)
 app.use(store)
 app.mount('#app')
