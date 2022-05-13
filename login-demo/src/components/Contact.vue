@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="isModalOpen = true">Open Modal</button>
+    <button @click="handleCLick">Open Modal</button>
     <Teleport to="body">
       <div v-if="isModalOpen" class="modal bg-green-400">
         <p>Hello from the modal!</p>
@@ -16,6 +16,16 @@ export default {
     return {
       isModalOpen: false,
     };
+  },
+  methods: {
+    handleCLick() {
+    //  isModalOpen = true;
+      this.windowRef = window.open(
+        "",
+        "",
+        "width=600,height=400,left=200,top=200"
+      );
+    },
   },
 };
 </script>
