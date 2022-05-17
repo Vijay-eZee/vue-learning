@@ -10,7 +10,7 @@ const matrix = ref([
 ]);
 const baseURL = "http://localhost:5001";
 let clientId = null;
-let gameId = null;
+let gameId = ref(null);
 let socket = null;
 
 onMounted(() => {
@@ -20,7 +20,7 @@ onMounted(() => {
 });
 function handleGameInstance(payload) {
   gameId = payload.gameId;
-  console.log("gameid-->" + gameId);
+  console.log("gameid-->" + gameId.value);
 }
 function handleSocketConnected(payload) {
   clientId = payload.clientId;
@@ -32,15 +32,20 @@ function createNewGame() {
 function joinById() {
   const request = {
     clientId: clientId,
-    gameId: gameId,
+    gameId: gameId.value,
   };
+
+  console.log(request);
   socket.emit("join", request);
 }
 </script>
 <template>
   <div class="bg-blue-200 h-screen flex justify-center items-center">
     <div class="flex bg-gray-200 p-10 w-96 h-72 justify-center items-center">
-      <div v-if="!gameId" class="flex-col justify-center items-center">
+      <div v-if="true" class="flex-col justify-center items-center">
+        <div>
+          <span>{{ gameId }}</span>
+        </div>
         <button-comp @click="createNewGame">create game</button-comp>
         <p>OR</p>
         <input-comp v-model="gameId" /><button-comp @click="joinById"
