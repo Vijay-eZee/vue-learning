@@ -1,0 +1,16 @@
+{
+  "name": "javascript_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/funTest.js",
+    "doc":"jsdoc -c jsdoc.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jsdoc": "^3.6.10"
+  }
+}
