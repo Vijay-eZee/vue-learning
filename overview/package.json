@@ -2,11 +2,11 @@
   "name": "javascript_demo",
   "version": "1.0.0",
   "description": "",
-  "main": "hello.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "node src/funTest.js",
-    "doc":"jsdoc -c jsdoc.json"
+    "start": "node src/index.js",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "author": "",
   "license": "ISC",

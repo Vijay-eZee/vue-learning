@@ -1,5 +1,4 @@
-import { arrayOperation } from './services/jsonOperation'
-const data =[
+export const productData =[
     {
       "_id": {
         "$oid": "5968dd23fc13ae04d9000001",
@@ -32,5 +31,16 @@ const data =[
       "supplier": "Schmitt-Weissnat",
       "quantity": 211,
       "unit_cost": "20"
-    }
+  },
+  {
+    "_id": {
+      "$oid": "5968dd23fc13ae04d9000004",
+      "$did": "",
+      
+    },
+    "product_name": "Scale",
+    "supplier": "Keebler-Hilpert",
+    "quantity": 20,
+    "unit_cost": "15"
+  }
   ]
